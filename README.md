@@ -1,66 +1,85 @@
-#### 1️⃣ Fork the Original Repository
-#### Go to the original repository on GitHub and click "Fork" to create a copy under your account.
-#### This is your workspace where you can freely make changes.
+## 🧩 CI/CD & Git Workflow Cheatsheet
 
-#### 2️⃣ Clone Your Fork Locally
-git clone https://github.com/your-username/forked-repo.git
-cd forked-repo
-#### This downloads the repository to your machine. You now have a local copy to work on.
+From Contributing to Someone Else’s Repository (Forked Repo)
+This guide outlines the repeating steps when contributing changes to a project where the original repository is already set as upstream.
 
-#### 3️⃣ Set Up the Original Repo as Upstream
-git remote add upstream https://github.com/original-owner/original-repo.git
-git fetch upstream
-#### 'origin' -> your fork
-#### 'upstream' -> original repository
-#### This allows you to sync changes from the original repo later.
+## 🪄 1. Initial Setup (One-time Only)
+#### 1. Fork the original repository on GitHub
+####    (Click "Fork" on the original repo)
 
-#### 4️⃣ Create a New Branch for Your Work
-git checkout -b feature/my-change
-#### Never work directly on main/master.
-#### Branch names should describe the feature or fix (e.g., bugfix/login-error, feature/dashboard-ui).
+#### 2. Clone your fork to your local machine
+git clone https://github.com/<your-username>/<repo-name>.git
+cd <repo-name>
 
-#### 5️⃣ Make Changes / Code
-#### Edit files, add features, fix bugs, etc.
-#### Test your changes locally.
+#### 3. Add the original repo as "upstream"
+git remote add upstream https://github.com/<original-owner>/<repo-name>.git
 
-#### 6️⃣ Stage and Commit Changes
-git add .
-git commit -m "Add feature X / Fix bug Y"
-#### Commit messages should be clear and concise.
+#### 4. Verify remotes
+git remote -v
+#### Should show both origin (your fork) and upstream (original repo)
 
-#### 7️⃣ Sync With Original Repo (Optional, recommended)
-git fetch upstream
+## 🔁 2. Repeating Steps Every Time You Contribute
+
+### 🧭 Step 1. Sync Your Local Branch with the Upstream Main Branch
+#### Switch to your main branch
 git checkout main
-git merge upstream/main
-git checkout feature/my-change
-git rebase main  #### or merge main into your branch
-#### Ensures your branch is up-to-date before submitting.
 
-#### 8️⃣ Push Your Branch to Your Fork
-git push origin feature/my-change
-#### Uploads your branch to your GitHub fork.
-
-#### 9️⃣ Create a Pull Request (PR)
-#### Go to your fork on GitHub, click "Compare & pull request".
-#### Target repository: original owner's repo.
-#### Target branch: usually main or develop.
-#### Add description, screenshots, context if needed.
-#### Submit PR.
-
-#### 🔟 CI/CD Integration
-#### If the original repo has CI/CD (GitHub Actions, Travis, Jenkins):
-#### Your PR will trigger automated builds, tests, linting.
-#### Fix any failing tests, then push changes to the same branch.
-#### PR updates automatically.
-
-#### 1️⃣1️⃣ Merge / Review
-#### Maintainers review your PR.
-#### They may request changes → update your branch → push again.
-#### Once approved, maintainers merge your branch into the original repo.
-
-#### Optional: Keep Your Fork Updated
+#### Fetch the latest changes from the original repo
 git fetch upstream
-git checkout main
+
+#### Merge them into your local main
 git merge upstream/main
+
+#### Push the updated main to your fork
 git push origin main
-#### Keeps your fork in sync with the original repo for future contributions.
+
+### 🧩 Step 2. Create a New Feature Branch for Your Changes
+#### Create and switch to a new branch
+git checkout -b fix/your-feature-name
+
+### 🧠 Step 3. Make Changes in Your Code
+#### Edit, add, or delete files as needed
+#### Once done, stage and commit your changes
+
+git add .
+git commit -m "Description of your changes"
+
+### ☁️ Step 4. Push Your Branch to Your Fork
+git push origin fix/your-feature-name
+
+### 🔄 Step 5. Create a Pull Request (PR)
+1.	Go to your forked repository on GitHub.
+2.	You’ll see a “Compare & Pull Request” button — click it.
+3.	Ensure the base repository is the original repo and the base branch is main.
+4.	Add a short description and submit the pull request.
+
+### 🧹 Step 6. After PR Is Merged
+Once your PR is accepted and merged by the original repo’s maintainer:
+#### Switch to your main branch
+git checkout main
+
+#### Pull the latest changes from upstream
+git fetch upstream
+git merge upstream/main
+
+#### Push the updated main to your fork
+git push origin main
+
+#### Delete your local feature branch if done
+git branch -d fix/your-feature-name
+
+#### Delete remote branch from your fork if desired
+git push origin --delete fix/your-feature-name
+
+### 🧭 Notes
+•	Always create a new branch per feature or fix — never code directly on main.
+•	If your branch becomes outdated before your PR is merged:
+    git fetch upstream
+    git rebase upstream/main
+•	Keep commits small and meaningful.
+•	Use clear, descriptive PR titles.
+
+
+
+
+
