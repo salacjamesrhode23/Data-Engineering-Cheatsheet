@@ -11,6 +11,9 @@ This guide outlines the repeating steps when contributing changes to a project w
 git clone https://github.com/<your-username>/<repo-name>.git
 cd <repo-name>
 
+###  3. Set Origin Repository pointing to your own accounts
+git remote set-url origin https://github.com/<your-github-account>/<repo-name>.git
+
 #### 3. Add the original repo as "upstream"
 git remote add upstream https://github.com/<original-owner>/<repo-name>.git
 
